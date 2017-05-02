@@ -46,23 +46,13 @@ class Gallery extends React.Component {
     return this.state["filteredPhotos"].length;
   }
 
-  paginatedPhotos() {
-    let start = (this.state.currentPage - 1) * 12;
-    let stop = start + 12;
-    if (this.state.currentPage === this.state.maxPage) {
-      stop = this.filteredPhotosLength() - start;
-    }
-    console.log(start);
-    return this.state.filteredPhotos.slice(start, stop);
-  }
-
   render() {
     return (
       <div>
         <h2>Gallery</h2>
         <h4>Filter Results: {this.filteredPhotosLength()}</h4>
         <Select options={this.filters} handler={this._onClickHandler} />
-        <Images images={this.paginatedPhotos()} />
+        <Images images={this.state.filteredPhotos} />
       </div>
     );
   }
