@@ -1,7 +1,8 @@
 import React from "react";
 const photos = require("./photos");
 import Images from "./Images";
-import Button from "./Button";
+// import Button from "./Button";
+import Select from "./Select";
 
 class Gallery extends React.Component {
   constructor() {
@@ -10,8 +11,15 @@ class Gallery extends React.Component {
     this.state = {
       allPhotos: photos.data,
       filteredPhotos: photos.data,
-      filter: "all"
+      filter: "all",
+      filteredPhotosLength: undefined,
+      page:{
+        currentPage:1,
+        maxPage:1
+      }
     };
+
+    this.filters = ["All", "Lark", "Reyes", "Normal", "Inkwell"];
     this._onClickHandler = this._onClickHandler.bind(this);
   }
 
@@ -24,7 +32,7 @@ class Gallery extends React.Component {
 
   filterPhotos(filterParam) {
     let results;
-    if (filterParam === "all") {
+    if (filterParam === "All") {
       results = this.state.allPhotos;
     } else {
       results = this.state["allPhotos"].filter(photo => {
@@ -34,11 +42,16 @@ class Gallery extends React.Component {
     return results;
   }
 
+  filteredPhotosLength() {
+    return this.state["filteredPhotos"].length;
+  }
+
   render() {
     return (
       <div>
         <h2>Gallery</h2>
-        <Button handler={this._onClickHandler} />
+        <h4>Filter Results: {this.filteredPhotosLength()}</h4>
+        <Select options={this.filters} handler={this._onClickHandler} />
         <Images images={this.state.filteredPhotos} />
       </div>
     );
@@ -46,3 +59,9 @@ class Gallery extends React.Component {
 }
 
 export default Gallery;
+
+
+deduce possible page numbers by length of filtered array
+set to state
+send slice values to images based on state
+store page as current page and last page
