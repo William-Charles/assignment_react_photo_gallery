@@ -1,34 +1,31 @@
 import React from "react";
 
 const Images = props => {
-  const { images, filter } = props;
+  const {images} = props;
 
   const imageArray = images.map(photo => {
-    if (photo.tags === filter) {
-      return (
-        <div className="col-sm-3 col-md-4">
-          <div className="thumbnail">
-            <a href={photo.link}>
-              <img src={photo.images.low_resolution.url} />
+    return (
+      <div className="col-sm-3 col-md-4">
+        <div className="thumbnail">
+          <a href={photo.link}>
+            <img src={photo.images.low_resolution.url} />
+          </a>
+          <div className="caption">
+            <p># Comments {photo.comments.count}</p>
+            <p># Likes {photo.likes.count}</p>
+            <a
+              href={
+                "https://www.instagram.com/" + photo.user.username + "?hl=en"
+              }
+            >
+              <p>User: {photo.user.username} </p>
             </a>
-            <div className="caption">
-              <p># Comments {photo.comments.count}</p>
-              <p># Likes {photo.likes.count}</p>
-              <a
-                href={
-                  "https://www.instagram.com/" + photo.user.username + "?hl=en"
-                }
-              >
-                <p>User: {photo.user.username} </p>
-              </a>
-              <p>Filter Used: {photo.filter}</p>
-              <p>Tags: {photo.tags}</p>
-            </div>
+            <p>Filter Used: {photo.filter}</p>
+            <p>Tags: {photo.tags}</p>
           </div>
         </div>
-      );
-    }
-    return null;
+      </div>
+    );
   });
 
   return <div>{imageArray}</div>;

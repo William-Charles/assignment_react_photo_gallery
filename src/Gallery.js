@@ -1,15 +1,34 @@
-import React from "react";
-import Images from "./Images";
+import React, {Component} from "react";
 const photos = require("./photos");
-import Filter from "./FilterButton";
+import Images from "./Images";
+import Button from "./Button";
 
-const Gallery = () => {
-  return (
-    <div>
-      <h2>Gallery</h2>
-      <Images images={photos.data} />
-    </div>
-  );
-};
+class Gallery extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      allPhotos: photos.data,
+      filteredPhotos: photos.data
+    };
+    this._onClickHandler = this._onClickHandler.bind(this);
+  }
+
+  _onClickHandler() {
+    this.setState({
+      filter: "Juno"
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <h2>Gallery</h2>
+        <Button handler={_onClickHandler} />
+        <Images images={this.state.filteredPhotos} />
+      </div>
+    );
+  }
+}
 
 export default Gallery;
