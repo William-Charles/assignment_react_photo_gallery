@@ -1,8 +1,8 @@
 import React from "react";
 
 const Images = props => {
-  const {images} = props;
-
+  const { images } = props;
+  console.log(images);
   const imageArray = images.map(photo => {
     return (
       <div className="col-sm-3 col-md-4">
