@@ -1,6 +1,7 @@
 import React from "react";
 import Images from "./Images";
 const photos = require("./photos");
+import Filter from "./FilterButton";
 
 const Gallery = () => {
   return (
