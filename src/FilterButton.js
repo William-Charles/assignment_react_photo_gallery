@@ -19,7 +19,7 @@ class Button extends React.Component {
   render() {
     return (
       <div>
-        <Images filter={this.state.filter} />
+        <Images images={photos.data} filter={this.state.filter} />
       </div>
     );
   }
