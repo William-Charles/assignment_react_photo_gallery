@@ -13,9 +13,9 @@ class Gallery extends React.Component {
       filteredPhotos: photos.data,
       filter: "all",
       filteredPhotosLength: undefined,
-      page:{
-        currentPage:1,
-        maxPage:1
+      page: {
+        currentPage: 1,
+        maxPage: 1
       }
     };
 
@@ -46,13 +46,23 @@ class Gallery extends React.Component {
     return this.state["filteredPhotos"].length;
   }
 
+  paginatedPhotos() {
+    let start = (this.state.currentPage - 1) * 12;
+    let stop = start + 12;
+    if (this.state.currentPage === this.state.maxPage) {
+      stop = this.filteredPhotosLength() - start;
+    }
+    console.log(start);
+    return this.state.filteredPhotos.slice(start, stop);
+  }
+
   render() {
     return (
       <div>
         <h2>Gallery</h2>
         <h4>Filter Results: {this.filteredPhotosLength()}</h4>
         <Select options={this.filters} handler={this._onClickHandler} />
-        <Images images={this.state.filteredPhotos} />
+        <Images images={this.paginatedPhotos()} />
       </div>
     );
   }
@@ -60,8 +70,7 @@ class Gallery extends React.Component {
 
 export default Gallery;
 
-
-deduce possible page numbers by length of filtered array
-set to state
-send slice values to images based on state
-store page as current page and last page
+// deduce possible page numbers by length of filtered array
+// set to state
+// send slice values to images based on state
+// store page as current page and last page
