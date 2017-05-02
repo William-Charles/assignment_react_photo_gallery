@@ -24,7 +24,7 @@ class Gallery extends React.Component {
     return (
       <div>
         <h2>Gallery</h2>
-        <Button handler={_onClickHandler} />
+        <Button handler={this._onClickHandler} />
         <Images images={this.state.filteredPhotos} />
       </div>
     );
