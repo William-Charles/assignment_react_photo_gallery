@@ -1,7 +1,7 @@
 import React from "react";
 
 const Button = ({handler}) => {
-  return <button onClick={handler} />;
+  return <button onClick={handler}>Filter</button>;
 };
 
 export default Button;
